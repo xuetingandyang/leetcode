@@ -47,9 +47,29 @@ class Solution:
         return nums
 
 
+    def insertion_sort(self, nums: List[int]) -> List[int]:
+        # start form the 2-rd element, put this element to a proper location
+        # right location: find the left element < nums[idx] < right element
+        # move the elements large than nums[idx] to back
+
+        for i in range(1, len(nums)):
+            idx = i
+            val = nums[i]
+
+            while nums[idx - 1] > nums[idx]:    # swap nums[idx-1] with nums[idx]
+                nums[idx] = nums[idx - 1]   # the large on move back
+                idx -= 1
+
+            nums[idx] = val
+        return nums
+
+
+
+
 if __name__ == "__main__":
     nums = [1, 6, 7, 8, 2, 2, 3, -4, -3]
     Test = Solution()
     print(Test.bubble_sort(nums))
     print(Test.bubble_sort(nums))
+    print(Test.insertion_sort(nums))
 
