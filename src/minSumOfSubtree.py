@@ -26,6 +26,11 @@ class Solution:
     def minSubtree(self, root):
         """
         recursion-divide conquer (with return) + traversal (global var)
+
+        1. sum = left + right + root.val
+        2. so helper should have return: sum
+        3. we get sum for each node --> ring game 打擂台 + global var
+
         :param root: TreeNode
         :return: TreeNode
         """
@@ -43,7 +48,7 @@ class Solution:
         # divide conquer + merge
         sum = self.helper(root.left) + self.helper(root.right) + root.val
 
-        # compare
+        # ring game 打擂台
         if sum < self.min_sum:
             self.min_sum = sum
             self.subtree = root
