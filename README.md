@@ -1,2 +1,1 @@
-My leetcode codes written in Python3.
-Fighting!!!
+My leetcode codes written in Java and Python3.
