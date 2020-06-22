@@ -27,8 +27,6 @@ import java.util.List;
 *
 * for each partition, we need to check if it is palindrome O(n)
 * and make a copy of the partition into the output (deep copy) O(n)
-* so
-*
 * */
 public class PalindromePartitioning {
     boolean[][] isP;
