@@ -73,6 +73,7 @@ public class WordLadder {
     private String replace(String word, int index, char c) {
         char[] chars = word.toCharArray();
         chars[index] = c;
+        // deep copy
         return new String(chars);
     }
 
