@@ -56,8 +56,7 @@ public class SortLinkedList {
             slow = slow.next;
             fast = fast.next.next;
         }
-
-        // cut: .. -> prev -> slow (mid node) -> ..
+        // CUT: .. -> prev -> slow (mid node) -> ..
         // set prev's next = null
         prev.next = null;
 
