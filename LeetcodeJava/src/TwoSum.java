@@ -94,6 +94,6 @@ public class TwoSum {
         /* Test println function and toString() method  */
         System.out.println(rst);    // print address [I@6537cf78
         System.out.println(Arrays.toString(rst));   // [1, 2]
-        
+
     }
 }
