@@ -13,7 +13,7 @@ import java.util.*;
 
 public class TwoSum {
 
-    class Pair {
+    private class Pair {
         int idx, val;
 
         private Pair (int idx, int val) {
