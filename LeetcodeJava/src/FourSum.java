@@ -58,7 +58,7 @@ public class FourSum {
             return twoSum(nums, target, start);
         }
         for (int i = start; i < nums.length; i ++) {
-            // skip same element
+            // skip same element, notice: i > start not i > 0
             if (i > start && nums[i] == nums[i - 1]) continue;
 
             // recursive call kSum, --> k-1 SUM
