@@ -50,6 +50,7 @@ public class UglyNumberII {
         }
         return minUglyNum.intValue();
     }
+    // O(nlogn) time, O(n) space
 
     public static void main(String[] args) {
         UglyNumberII obj = new UglyNumberII();
