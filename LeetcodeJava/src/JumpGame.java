@@ -14,6 +14,12 @@
 
 public class JumpGame {
     public boolean canJumpGreedy (int[] nums) {
+        // Greedy problems usually look like:
+        //  -"Find minimum number of something to do something"
+        //  - or "Find maximum number of something to fit in some conditions".
+        // The idea of greedy algorithm is to pick locally optimal move at each step,
+        // that will lead to globally optimal solution.
+        //
         // Greedy Algorithm: start from the last node, check if current node can reach destination
         // update 'dest' to curNode if curNode can reach curDest
         int size = nums.length;
@@ -25,6 +31,22 @@ public class JumpGame {
             }
         }
         return dest == 0;
+    }
+
+    public boolean canJumpGreedyTopDown(int[] nums) {
+        // if max of previous nodes'furtherDest < curNode, return false
+        // update curNode's furtherDest
+        // until reach last node, return true
+        int size = nums.length;
+        int furtherDest = nums[0] + 0;
+
+        for (int i = 1; i < size; i ++) {
+            // if cannot reach furtherDest, return false
+            if (furtherDest < i) return false;
+            // update furtherDest
+            furtherDest = Math.max(furtherDest, nums[i] + i);
+        }
+        return true;
     }
 
     public boolean canJumpBottomUp (int[] nums) {
@@ -49,6 +71,7 @@ public class JumpGame {
         }
         return dp[0] == 1;
     }
+
 
 
     public boolean canJump (int[] nums) {
