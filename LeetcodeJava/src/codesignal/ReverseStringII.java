@@ -1,5 +1,6 @@
 package codesignal;
 //leetcode 541. Reverse String II
+// "abcdefg" => bacdfeg
 public class ReverseStringII {
     public String reverse(String s){
         StringBuffer sb = new StringBuffer();
