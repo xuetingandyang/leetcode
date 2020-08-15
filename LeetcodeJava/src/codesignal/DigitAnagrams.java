@@ -1,6 +1,5 @@
 package codesignal;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 //Similar to leetcode 49

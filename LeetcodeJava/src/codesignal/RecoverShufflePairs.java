@@ -63,7 +63,7 @@ public class RecoverShufflePairs {
                 Arrays.asList(2,3)
         );
         RecoverShufflePairs obj = new RecoverShufflePairs();
-        List<Integer> nums = obj.recoverPairs(pairs2);
+        List<Integer> nums = obj.recoverPairs(pairs);
         System.out.println(nums);
 
     }
