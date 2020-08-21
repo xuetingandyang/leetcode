@@ -40,7 +40,7 @@ public class NQueens {
 
     // rst stores all the lines of the chessboard
     // cols stores the possible column indices for each row
-    // 1-recursion definition
+    //k 1-recursion definition
     public void search (List<List<String>> rst,
                         List<Integer> cols,
                         int n) {

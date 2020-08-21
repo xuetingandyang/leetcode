@@ -108,14 +108,14 @@ public class PalindromePartitioning {
         for (int i = 0; i < n; i ++) {
             isP[i][i] = true;
         }
-
-        for (int i = 0; i < n - 1; i ++) {
-            isP[i][i + 1] = (s.charAt(i) == s.charAt(i + 1));
+        for (int i = 1; i < n; i ++) {
+            for (int j = 0; j < i; j ++) {
+                isP[i][j] = false;
+            }
         }
-
-        for (int i = n - 2; i >= 0; i --) {
-            for (int j = i + 2; j < n; j ++) {
-                 isP[i][j] = isP[i + 1][j - 1] && s.charAt(i) == s.charAt(j);
+        for (int i = 0; i < n; i ++) {
+            for (int j = i + 1; j < n; j ++) {
+                isP[i][j] = isPalindrome(s.substring(i, j+1));
             }
         }
     }

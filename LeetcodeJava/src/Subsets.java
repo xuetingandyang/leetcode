@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,17 +9,18 @@ import java.util.List;
 * Combination: 2^N = C_N^1 + C_N^2 + .. + C_N^N
 * Subsets: 2^N
 */
+
 public class Subsets {
     public List<List<Integer>> subsetsIerative(int[] nums) {
         List<List<Integer>> rst = new ArrayList<>();
-        rst.add(new ArrayList<Integer>());
+        rst.add(new ArrayList<>());
 
         for (int num: nums) {
             List<List<Integer>> newSubsets = new ArrayList<>();
             // add element into current results
             // loop1: [], [1]   loop2:[2], [1, 2]   loop3: [3], [1, 3], [2, 3], [1, 2, 3]
             for (List<Integer> curr: rst) {
-                newSubsets.add(new ArrayList<Integer>(curr) {{ add(num); }} );
+                newSubsets.add(new ArrayList<>(curr) {{ add(num); }} );
             }
             // add new subsets into results
             for (List<Integer> curr: newSubsets) {
@@ -39,6 +39,7 @@ public class Subsets {
 
     // Space complexity: O(N×2^N) to keep all the subsets of length N, since each of N elements could be present or absent.
     // since there are total 2^N subsets, each contains 0-N numbers, to cahce them, you need O(N*2^N) space.
+    // in summary, we need O(0-N) to keep temporary result.
 
     public List<List<Integer>> subsetsDFS(int[] nums) {
         List<List<Integer>> rst = new ArrayList<>();
@@ -68,7 +69,7 @@ public class Subsets {
 
             // System.out.println(rst);
             // rst.add(subset);
-            // wrong, add(subset) only add the reference, but the refered value is changing.
+            // wrong, add(subset) only add the reference, but the referred value is changing.
             // for len=1, rst=[[], [3], [3], [3]]
             // for len=2, first set subset = [], so rst = [[],[],[],[],[2,3],[2,3],[2,3]]
             // for len=3, first set subset = [], so rst = [[],[],[],[],[],   [],   [],  [1,2,3]]

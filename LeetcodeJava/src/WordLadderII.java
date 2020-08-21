@@ -53,13 +53,14 @@ public class WordLadderII {
 
         if (wordList == null || wordList.size() == 0) return rst;
 
-        List<String> path = new ArrayList<>();
         Map<String, List<String>> graph = new HashMap<>();
-        Set<String> dict = new HashSet<>(wordList);
+        Set<String> wordSet = new HashSet<>(wordList);
 
-        buildGraph(beginWord, endWord, graph, dict);
-
-        dfs(beginWord, endWord, graph, new ArrayList<String>(), rst);
+        buildGraph(beginWord, endWord, graph, wordSet);
+        System.out.println(graph);
+        List<String> path = new ArrayList<>();
+        path.add(beginWord);
+        dfs(beginWord, endWord, graph, path, rst);
 
         return rst;
     }
@@ -68,7 +69,7 @@ public class WordLadderII {
     private void buildGraph(String beginWord,
                             String endWord,
                             Map<String, List<String>> graph,
-                            Set<String> dict) {
+                            Set<String> wordSet) {
 
         Set<String> visited = new HashSet<>();
         Set<String> toVisit = new HashSet<>();
@@ -85,7 +86,7 @@ public class WordLadderII {
 
             for (int i = 0; i < count; i ++) {
                 String word = queue.poll();
-                List<String> children = getNextLevel(word, dict);
+                List<String> children = getNextLevel(word, wordSet);
 
                 // traverse all neighbors of current word,
                 // update graph and queue for next level ladder
@@ -143,18 +144,31 @@ public class WordLadderII {
                      Map<String, List<String>> graph,
                      List<String> path,
                      List<List<String>> rst) {
-        path.add(curWord);
+//        path.add(curWord);
+//
+//        // 2-recursion exit
+//        if (curWord.equals(endWord)) {
+//            // deep copy
+//            rst.add(new ArrayList<>(path));
+//        } else if (graph.containsKey(curWord)) {
+//            for (String nextWord: graph.get(curWord)) {
+//                dfs(nextWord, endWord, graph, path, rst);
+//            }
+//        }
+//        path.remove(path.size() - 1);
 
-        // 2-recursion exit
-        if (curWord.equals(endWord)) {
-            // deep copy
-            rst.add(new ArrayList<String>(path));
-        } else if (graph.containsKey(curWord)) {
-            for (String nextWord: graph.get(curWord)) {
-                dfs(nextWord, endWord, graph, path, rst);
-            }
+        if (curWord.equals(endWord)) {   // recursion exit
+            rst.add(new ArrayList<>(path));
+            return;
         }
-        path.remove(path.size() - 1);
+
+        for (String next : graph.get(curWord)) {
+            System.out.println(next);
+            System.out.println(path);
+            path.add(next);
+            dfs(next, endWord, graph, path, rst);
+            path.remove(path.size() - 1);
+        }
     }
 
 

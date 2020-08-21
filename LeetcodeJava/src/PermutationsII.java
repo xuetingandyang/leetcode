@@ -57,7 +57,7 @@ public class PermutationsII {
         for (int i = 0; i < nums.length; i ++) {
             // if already visited, skip
             if (visited[i]) continue;
-
+            // keep [2,1',1'']  discard [2,1'',1']
             // if current element = previous UNVISITED element, skip current element
             if (i != 0 && nums[i] == nums[i - 1] && !visited[i - 1]) continue;
 
