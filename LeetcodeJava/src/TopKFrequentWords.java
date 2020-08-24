@@ -23,7 +23,7 @@ public class TopKFrequentWords {
         Map<String, Integer> map = new HashMap<>();
 
         for (String word : words) {
-            map.put(word, map.getOrDefault(word, 1) + 1);
+            map.put(word, map.getOrDefault(word, 0) + 1);
         }
 
         PriorityQueue<String> minHeap = new PriorityQueue<>(

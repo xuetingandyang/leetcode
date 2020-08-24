@@ -24,7 +24,8 @@ public class ThreeSum {
         while (p1 < p2) {
             int sum = nums[p1] + nums[p2];
             if (sum == target) {
-                rst.add(new ArrayList<>(List.of(nums[i], nums[p1], nums[p2])));
+//                rst.add(new ArrayList<>(List.of(nums[i], nums[p1], nums[p2])));
+                rst.add(Arrays.asList(nums[i], nums[p1], nums[p2]));
                 // jump to next different element
                 while (p1 < p2 && nums[p1] == nums[p1 + 1]) p1++;
                 while (p1 < p2 && nums[p2] == nums[p2 - 1]) p2--;

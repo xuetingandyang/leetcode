@@ -39,7 +39,7 @@ public class TwoSumClosestToTarget {
 
     public static void main(String[] args) {
         int[] nums = new int[] {-4, -3, 1, 6, 7};
-        int target = -1;
+        int target = 7;
         int[] result = twoSumCloset(nums, target);
         System.out.println(result);
     }

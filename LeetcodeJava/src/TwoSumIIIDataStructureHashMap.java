@@ -26,13 +26,13 @@ public class TwoSumIIIDataStructureHashMap {
 
     // Initialize your data structure here
     public TwoSumIIIDataStructureHashMap() {
-        this.nums = new ArrayList<>();
-        this.map = new HashMap<>();
+        nums = new ArrayList<>();
+        map = new HashMap<>();
     }
 
     /** Add the number to an internal data structure */
     public void add(int number) {
-        this.nums.add(number);
+        nums.add(number);
         // set default count=0
         map.put(number, map.getOrDefault(number, 0) + 1);
     }

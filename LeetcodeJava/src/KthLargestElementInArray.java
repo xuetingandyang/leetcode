@@ -35,12 +35,8 @@ public class KthLargestElementInArray {
         if (nums == null || nums.length == 0 || k == 0) {
             return -1;
         }
-        PriorityQueue<Integer> heap = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
+        PriorityQueue<Integer> heap = new PriorityQueue<>(k, (a, b) -> (b-a));
+
         for (int i = 0; i < nums.length; i++) {
             heap.offer(nums[i]);
         }

@@ -36,12 +36,7 @@ public class TwoSum {
             numsPairs[i] = new Pair(i, nums[i]);
         }
         // override comparator
-        Arrays.sort(numsPairs, new Comparator<Pair> () {
-            @Override
-            public int compare(Pair o1, Pair o2) {
-                return o1.val - o2.val;
-            }
-        });
+        Arrays.sort(numsPairs, (a, b) -> (a.val - b.val));
 
         int i = 0, j = nums.length - 1;
 
@@ -73,7 +68,7 @@ public class TwoSum {
 
         for (int i = 0; i < nums.length; i++) {
             if (map.containsKey(target - nums[i])) {
-                return new int[] {i, map.get(target - nums[i])};
+                return new int[] {map.get(target - nums[i]), i};
             }
             map.put(nums[i], i);
         }
@@ -86,7 +81,7 @@ public class TwoSum {
 
         TwoSum answer = new TwoSum();
         int[] nums = new int[] {3, 2, 4, 1, 5};
-        int target = 10;
+        int target = 9;
 
         int[] rst = answer.twoSum(nums, target);
         int[] rst2 = answer.twoSumHashMap(nums, target);
