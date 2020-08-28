@@ -11,6 +11,8 @@ package textiq;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +21,6 @@ public class ChemicalReaction {
         s = s.trim();
         String patternStr = "([A-Z][a-z]*)([0-9]*)";
         Matcher matcher = Pattern.compile(patternStr).matcher(s);
-
         int multiplier = 1, end = 0;
         while (matcher.find()) {
             if (end == 0) {

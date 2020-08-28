@@ -68,59 +68,53 @@ public class ThreeSum {
     }
 
 
-    public static List<List<Integer>> threeSumHashSet(int[] nums) {
-        // PASS!!! TOO SLOW AND JAVA HAS NO EASY PAIR DATE STRUCTURE.
 
-        // HashSet: time: O(n^2), space: O(n^2)
-        // for each different nums[i], find twosum with target = - nums[i]
-        // Note: handling duplicates in pairs of 3 numbers
-        // -> put pairs of 3 into 'found' set & ascending numbers in pairs
-        // (to avoid we have same numbers in different positions of pair)
+    private static void twoSumHashset(int[] nums, int target, int startIdx, List<List<Integer>> rst) {
+
+        Set<Integer> seen = new HashSet<>();
+        for (int i = startIdx; i < nums.length; i ++) {
+            int remainTarget = target - nums[i];
+
+            if (seen.contains(remainTarget)) {
+                rst.add(Arrays.asList(-target, remainTarget, nums[i]));
+
+                // jump to next different i
+                // eg: 2,2,2,3 => get the last '2'
+                while (i+1 < nums.length && nums[i] == nums[i+1]) i ++;
+            }
+            seen.add(nums[i]);
+        }
+    }
+
+    public static List<List<Integer>> threeSumHashSet(int[] nums) {
+        // HashMap
 
         List<List<Integer>> rst = new ArrayList<>();
-        Set<Map.Entry> found = new HashSet<>();
 
-        if (nums == null || nums.length < 3) return rst;
+        if (nums == null || nums.length == 0) return rst;
 
-        for (int i = 0; i < nums.length - 2; i ++) {
+        // sort array to help remove duplicate
+        Arrays.sort(nums);
+        int n = nums.length;
 
-            // find unique TwoSum with target = - nums[i]
-            int target = - nums[i];
-            Set<Integer> uniques = new HashSet<>();
-//            Set<Integer> seen = new HashSet<>();
-
-            for (int j = i + 1; j < nums.length; j ++) {
-                int newTarget = target - nums[j];
-
-                // !!! check if uniques contain newTarget first!
-                // should before check uniques contain 'nums[j]'
-                // Otherwise, we will encounter wrong case:
-                //  like: nums[j] = 2, newTarget = 2 ==> use nums[j] twice
-                if (uniques.contains(newTarget)) {
-                    // ascending order to avoid duplicates in pairs
-                    // head: min num, tail: max num
-                    // Pair = (head, _, tail)
-                    int head = Math.min(nums[i], Math.min(nums[j], newTarget));
-                    int tail = Math.max(nums[i], Math.max(nums[j], newTarget));
-
-                    Map.Entry<Integer, Integer> entry = new AbstractMap.SimpleEntry<Integer, Integer>(head, tail);
-                    if (found.add(entry) ){
-                        rst.add(new ArrayList<>(List.of(nums[i], nums[j], newTarget)));
-                    }
-                }
-                uniques.add(nums[j]);
-            }
+        for (int i = 0; i < n; i ++) {
+            // skip duplicates
+            if (i > 0 && nums[i] == nums[i-1]) continue;
+            int newTarget = - nums[i];
+            twoSumHashset(nums, newTarget, i+1, rst);
         }
         return rst;
     }
 
 
 
+
     public static void main(String[] args) {
         int[] nums = new int[]{-1, 0, 1, 2, -1, -4};
         List<List<Integer>> rst = threeSumTwoPointers(nums);
-//        List<List<Integer>> rst1 = threeSumHashSet(nums);
+        List<List<Integer>> rst1 = threeSumHashSet(nums);
         System.out.println(rst);
+        System.out.println(rst1);
     }
 
 }
