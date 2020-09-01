@@ -15,9 +15,11 @@ package amazonOA;
 //    Explanation:
 //    There are 6 ways to split this string into prime numbers which are (11, 3, 7, 3), (113, 7, 3), (11, 37, 3), (11, 3, 73), (113, 73) and (11, 373).
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SplitStringToPrimeNumbers {
     private final int MOD = 1000000007;
-    private int count;
 
     private boolean isPrimeNum(String s) {
         int num = Integer.parseInt(s);
@@ -29,23 +31,56 @@ public class SplitStringToPrimeNumbers {
         return true;
     }
 
-    private void traverse()
+    private void traverseConcrete(String s, int start, List<List<String>> rst, List<String> temp) {
+        // count # of prime number of s[start:]
+        // recursion exit - partition should contains ALL character
+        if (start == s.length()) {
+            rst.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = start; i < s.length(); i ++) {
+            String sub = s.substring(start, i + 1);
+            if (s.charAt(start) != '0' && isPrimeNum(sub)) {
+                temp.add(sub);
+                traverseConcrete(s, i + 1, rst, temp);
+                temp.remove(temp.size() - 1);
+            }
+        }
+    }
+
+    private int count = 0;
+    private void traverseCount(String s, int start) {
+        if (start == s.length()) {
+            count++;
+            return;
+        };
+        for (int i = start; i < s.length(); i ++) {
+            if (s.charAt(start) != '0' && isPrimeNum(s.substring(start, i + 1)))
+                traverseCount(s, i + 1);
+        }
+    }
+
 
     public int countWaysToPrimeNumber(String s) {
         // prime number: i can only be split to 1*i.
         // proof: in [2, sqrt(n)], cannot find a number that can be divided by 'i'
         // count all solutions => DFS-recursion
-        count = 0;
-        if (s == null || s.length() == 0) return count;
-        int n = s.length();
-        for (int i = 1; i < n; i ++) {
-            if (s.charAt(n - i) != '0' && isPrimeNum(s.substring(n - i, n))) {
-                count += countWaysToPrimeNumber(s.substring(i));
-//                count %= MOD;
-            }
-        }
+
+        if (s == null || s.length() == 0) return 0;
+//        List<List<String>> rst = new ArrayList<>();
+//        // can find all the partitions
+//        traverseConcrete(s, 0, rst, new ArrayList<>());
+//        return rst.size();
+
+        // Or just count the number of solutions
+        traverseCount(s, 0);
         return count;
     }
+
+//    public int countWaysToPrimeNumberDP(String s) {
+//        // count number of solutions, not concrete solution => DP
+//        // dp[i]: number of prime numbers, string s[:i]
+//    }
 
     public static void main(String[] args) {
         String s = "3175";
