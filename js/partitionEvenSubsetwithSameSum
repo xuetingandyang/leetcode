@@ -1,0 +1,47 @@
+let rst = new Array();
+
+let recurse = function(arr, sum, curtIdx, subset, flag) {
+  if (subset.length % 2 == 0 && sum == 0) {
+    subset.sort((a, b) => a - b);
+
+    if (subset[0] < rst[0]) {
+      rst.splice(0, 0, ...subset);
+    } else {
+      rst.push(...subset);
+    }
+    return;
+  }
+
+  if (arr.length === 0 || curtIdx >= arr.length) {
+    flag = -1;
+    return;
+  }
+
+  for (let i = curtIdx; i < arr.length; i ++) {
+    if (arr[i] > sum) continue;
+    subset.push(arr[i]);
+    recurse(arr, sum - arr[i], i + 1, subset, flag);
+    subset.pop();
+  }
+}
+
+function ArrayChallenge(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i ++) {
+    // count total sum
+    sum += arr[i];
+  }
+  // if sum is odd -> cannot have 2 even subsets with equal sum
+  if (sum % 2 !== 0) return -1;
+  // let rst = new Array();
+  let flag = 1;
+
+  recurse(arr, sum / 2, 0, new Array(), flag);
+
+  if (flag == -1) return -1;
+  else return rst;
+
+}
+
+// keep this function call here
+console.log(ArrayChallenge(readline()));
